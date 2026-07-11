@@ -149,6 +149,88 @@
     }
   }
 
+  function initRandomDog() {
+    const API_URL = "https://dog.ceo/api/breeds/image/random";
+    const btn = document.getElementById("dog-btn");
+    const display = document.getElementById("dog-display");
+    const placeholder = document.getElementById("dog-placeholder");
+    const loading = document.getElementById("dog-loading");
+    const image = document.getElementById("dog-image");
+    const errorEl = document.getElementById("dog-error");
+
+    if (!btn || !display || !loading || !image) return;
+
+    function setHidden(el, hidden) {
+      if (!el) return;
+      el.classList.toggle("is-hidden", hidden);
+    }
+
+    function showLoading() {
+      btn.disabled = true;
+      btn.setAttribute("aria-busy", "true");
+      display.setAttribute("aria-busy", "true");
+      display.classList.add("is-loading");
+      setHidden(loading, false);
+      setHidden(errorEl, true);
+    }
+
+    function hideLoading() {
+      btn.disabled = false;
+      btn.removeAttribute("aria-busy");
+      display.setAttribute("aria-busy", "false");
+      display.classList.remove("is-loading");
+      setHidden(loading, true);
+    }
+
+    function showError(message) {
+      hideLoading();
+      setHidden(placeholder, true);
+      setHidden(image, true);
+      if (errorEl) {
+        errorEl.textContent = message;
+        setHidden(errorEl, false);
+      }
+    }
+
+    async function fetchRandomDog() {
+      showLoading();
+
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error("無法取得狗狗圖片，請稍後再試。");
+        }
+
+        const data = await response.json();
+        if (data.status !== "success" || !data.message) {
+          throw new Error("API 回傳格式異常，請稍後再試。");
+        }
+
+        await new Promise(function (resolve, reject) {
+          const preload = new Image();
+          preload.onload = resolve;
+          preload.onerror = function () {
+            reject(new Error("圖片載入失敗，請再試一次。"));
+          };
+          preload.src = data.message;
+        });
+
+        image.src = data.message;
+        image.alt = "隨機狗狗照片";
+        setHidden(placeholder, true);
+        setHidden(errorEl, true);
+        setHidden(image, false);
+        hideLoading();
+      } catch (err) {
+        showError(
+          err instanceof Error ? err.message : "發生未知錯誤，請稍後再試。"
+        );
+      }
+    }
+
+    btn.addEventListener("click", fetchRandomDog);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initTheme();
     if (themeToggle) {
@@ -158,5 +240,6 @@
     initSmoothScroll();
     initReveal();
     initYear();
+    initRandomDog();
   });
 })();

@@ -111,6 +111,55 @@
         </div>
       </section>
 
+      <section id="random-dog" class="section section-dog">
+        <div class="container">
+          <div class="dog-panel reveal">
+            <div class="dog-panel__copy">
+              <p class="section-label">Random Dog</p>
+              <h2 class="dog-panel__title">來點可愛的</h2>
+              <p class="section-lead">
+                按下按鈕，從 Dog CEO API 取得一張隨機狗狗圖片。
+              </p>
+              <button
+                type="button"
+                class="btn btn--primary"
+                id="dog-btn"
+                aria-controls="dog-display"
+              >
+                隨機狗狗
+              </button>
+            </div>
+
+            <div
+              class="dog-panel__display"
+              id="dog-display"
+              aria-live="polite"
+              aria-busy="false"
+            >
+              <div class="dog-panel__placeholder" id="dog-placeholder">
+                <span class="dog-panel__placeholder-icon" aria-hidden="true"></span>
+                <p>還沒有照片，按左側按鈕看看今天的幸運狗狗！</p>
+              </div>
+
+              <div class="dog-panel__loading is-hidden" id="dog-loading">
+                <span class="dog-spinner" aria-hidden="true"></span>
+                <span class="dog-loading__text">載入中…</span>
+              </div>
+
+              <img
+                class="dog-panel__image is-hidden"
+                id="dog-image"
+                alt=""
+                width="640"
+                height="480"
+              />
+
+              <p class="dog-panel__error is-hidden" id="dog-error" role="alert"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="about" class="section section-about">
         <div class="container">
           <header class="section-header section-header--center reveal">
