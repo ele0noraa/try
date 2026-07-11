@@ -8,17 +8,25 @@
       content="個人作品集 — 前端開發與 UI 設計"
     />
     <title>Nora  | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
     <!-- 可替換：網站標題、導覽文案、各區塊內容與連結 -->
 
+    <div class="ambient-bg" aria-hidden="true"></div>
+
     <a class="skip-link" href="#main">跳至主要內容</a>
 
     <header class="site-header">
       <div class="header-inner">
-        <a class="logo" href="#hero" aria-label="回到頁首">Portfolio</a>
+        <a class="logo" href="#hero" aria-label="回到頁首">Nora</a>
 
         <button
           type="button"
@@ -59,7 +67,7 @@
           <div class="hero-inner reveal">
             <p class="badge">Front-end · UI/UX</p>
             <h1 class="hero-title">
-              Nora  用程式與設計，<br />
+              Nora 用程式與設計，<br />
               把想法變成可觸及的體驗。
             </h1>
             <p class="hero-slogan">
@@ -72,7 +80,9 @@
             </div>
           </div>
           <div class="hero-visual reveal" aria-hidden="true">
-            <div class="hero-visual-ring"></div>
+            <div class="hero-visual-glow"></div>
+            <div class="hero-visual-ring hero-visual-ring--outer"></div>
+            <div class="hero-visual-ring hero-visual-ring--inner"></div>
             <div class="hero-visual-core"></div>
           </div>
         </div>
